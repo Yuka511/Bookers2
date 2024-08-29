@@ -15,17 +15,17 @@
             </li>
             <li><!-- ログイン後のUsersリンク-->
               <%= link_to users_path, class: "nav-link text-light" do %>
-                <i class = "fa-solid fa-house"></i>Users
+                <i class="fa-solid fa-users"></i>Users
               <% end %>
             </li>
             <li><!-- ログイン後のBooksリンク-->
               <%= link_to books_path, class: "nav-link text-light" do %>
-                <i class = "fa-solid fa-house"></i>Books
+                <i class="fa-solid fa-book-open"></i>Books
               <% end %>
             </li>
             <li><!-- ログイン後のLog outリンク-->
               <%= link_to  destroy_user_session_path, method: :delete, class:"nav-link text-light" do %>
-                <i class = "fa-solid fa-right-to-bracket"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Log out
               <% end %>
             </li>
@@ -36,14 +36,14 @@
               <% end %>
             </li>
             <li><!-- ログイン前のAboutリンク-->
-              <%= link_to homes_about_path, class: "nav-link text-light" do %>
+              <%= link_to home_about_path, class: "nav-link text-light" do %>
                 <i class = "fa-solid fa-link"></i>About
               <% end %>
             </li>
             <li><!-- ログイン前のSign upリンク-->
               <%= link_to new_user_registration_path, class:"nav-link text-light" do %>
                 <i class = "fa-solid fa-user-plus"></i>
-                Sibn up
+                Sign up
               <% end %>
             </li>
             <li><!-- ログイン前のLog inリンク-->
