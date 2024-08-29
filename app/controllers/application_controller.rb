@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     user_path(current_user) # ログイン直後は、ユーザーの詳細ページへ遷移
   end
   
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(resource) #ログアウト直後は、topへ遷移
     root_path
   end
   
