@@ -2,6 +2,16 @@
   <div class = "row">
     <div class ="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>User info</h2>
+      <div class = "error_explanation">
+        <% if @user.errors.any? %>
+          <strong><%= @user.errors.count %>error prohibited this obj from being saved:</strong>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
       <%= form_with model: @user do |f| %>
         <label for="inputName">Name</label><br>
         <%= f.text_field :name, autofocus: true, id:"inputName" %><br>

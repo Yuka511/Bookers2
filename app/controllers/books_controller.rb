@@ -5,6 +5,8 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book.id)
     else
+      @user = current_user
+      @books = Book.all
       render :index
     end
   end
@@ -28,8 +30,11 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id]) #bookの取得
-    @book.update(book_params) #bookのアップデート
-    redirect_to book_path(@book.id) #bookの詳細ページへのパス
+    if @book.update(book_params) #bookのアップデート
+      redirect_to book_path(@book.id) #bookの詳細ページへのパス
+    else
+      render :edit
+    end
   end
 
   def destroy
