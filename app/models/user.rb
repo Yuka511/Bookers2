@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   has_many :books, dependent: :destroy
   has_one_attached :profile_image
-  
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/default-image.jpg')
@@ -14,12 +14,27 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width,height]).processed
   end
-  
-validates :name, 
-  presence: true, 
-  length: { minimum: 2, maximum: 20, 
-            too_short: "Name is too short (minimum is 2 characters)", 
-            too_long: "Name is too long (maximum is 20 characters)" }, 
-  uniqueness: true
-validates :introduction, length: { maximum: 50 }
+
+  #ゲストログイン機能追加-------------------------------------
+  GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+  #------------------------------------------------------------
+
+  validates :name,
+    presence: true,
+    length: { minimum: 2, maximum: 20,
+              too_short: "Name is too short (minimum is 2 characters)",
+              too_long: "Name is too long (maximum is 20 characters)" },
+    uniqueness: true
+  validates :introduction, length: { maximum: 50 }
 end
